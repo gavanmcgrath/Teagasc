@@ -1,7 +1,14 @@
-voroniRain <- function(start.date,end.date, daily = TRUE, plotVoroni = FALSE){
+voroniRain <- function(start.date,
+                       end.date, 
+                       daily = TRUE, 
+                       plotVoroni = FALSE, 
+                       fid = c("D:/Data/AHPC/climate_Daily/dlydatabase.rds","D:/Data/AHPC/climate_Hourly/hrldatabase.rds"){
   #Input Require
   #start.date a character vector of length 1 'yyyy-mm-dd'
   #end.date a character vector of length 1 'yyyy-mm-dd'
+  #daily a boolean indicating whether it is horuly (FALSE) or daily (TRUE) data.   
+  #plotVoroni a boolean, indicating whether to plot the Voroni tesellation       
+  #fid a character string of the name of the rds file to upload. Created by xxx.R                       
   
   #Input Optional:
   #daily a boolean (default = TRUE) whether to load available daily stations (TRUE)
@@ -21,20 +28,17 @@ voroniRain <- function(start.date,end.date, daily = TRUE, plotVoroni = FALSE){
   #The presence of D:/Data/AHPC/climate_Daily/dlydatabase.rds as created by
   #downloadDaily_Ireland.R
   
+  #Libraries
   require(rgdal)
   require(sp)
-  library(dismo)
+  require(dismo)
   require(raster)
-  
-  #corine <- readOGR("D:/Data/GIS/Corine/clc12_IE/clc12_IE.shp")
   #require(rgeos)
-  #ireland <- gIntersection(corine, corine)
-  #writeOGR(ireland, dsn = "D:/Data/GIS/Corine/Ireland.shp", layer = "Ireland.shp", driver = "ESRI Shapefile")
-  #ireland <- readOGR("D:/Data/GIS/Corine/Ireland.shp")
+  
   if (daily){
-    dailyDB <- readRDS("D:/Data/AHPC/climate_Daily/dlydatabase.rds")
+    dailyDB <- readRDS(fid)
   } else {
-    dailyDB <- readRDS("D:/Data/AHPC/climate_Hourly/hrldatabase.rds")
+    dailyDB <- readRDS(fid)
   }
   pos2strip <- which(dailyDB$stations$long == 0)
   if (length(pos2strip) > 0 ){
