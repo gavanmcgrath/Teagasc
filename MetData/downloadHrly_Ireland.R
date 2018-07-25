@@ -1,6 +1,8 @@
-#Pull Met Eireann rainfall data
+#Pulls Hourly Met Eireann rainfall data from a selection of sites
 cwd <- getwd()
+#edit this to an appropriate directory
 setwd("D:/Data/AHPC/climate_Hourly")
+#List of urls
 met.ie_hrlySites <- c(
 #Johnstown Castle
 "https://cli.fusio.net/cli/climate_data/webdata/hly1775.zip",
@@ -66,7 +68,7 @@ sapply(1:length(dest.files), FUN = function(x) {
   unlink(dest.files[x])
 })
 
-
+#Create Database
 wrking.dir <- getwd()
 dirs <- list.dirs()
 n <- length(met.ie_hrlySites)
@@ -125,9 +127,11 @@ for (i in 2:length(dirs)){
   
   setwd(wrking.dir)
 }
+#Save data to an R object
 saveRDS(list(stations = hrly.database, 
              weather = weather), 
         file = "hrldatabase.rds")
+#Reset the working directory
 setwd(cwd)
 
 
