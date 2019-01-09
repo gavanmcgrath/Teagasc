@@ -9,3 +9,5 @@ Metdata contains scripts for downloading hourly and daily rainfall data from Met
 ### Contact
 
 gavan.mcgrath at teagasc.ie
+
+#updated 09/01/2019
